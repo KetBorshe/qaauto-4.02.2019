@@ -3,8 +3,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class HomePage {
-    WebDriver driver;
-    WebElement profileNavigationItem;
+    private WebDriver driver;
+    private  WebElement profileNavigationItem;
 
     public HomePage(WebDriver driver){
         this.driver = driver;
@@ -12,7 +12,7 @@ public class HomePage {
 
     }
 
-    public void initElements(){
+    private void initElements(){
 
         profileNavigationItem = driver.findElement(By.xpath("//li[@id='profile-nav-item']"));
     }

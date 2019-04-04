@@ -5,18 +5,18 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class LoginPage {
 
-    WebDriver driver;
+    private WebDriver driver;
 
-    WebElement emailField;
-    WebElement passwordField;
-    WebElement singInButton;
+    private WebElement emailField;
+    private WebElement passwordField;
+    private WebElement singInButton;
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
         initElements();
 
     }
-    public void initElements(){
+    private void initElements(){
         emailField = driver.findElement(By.xpath("//input[@id='login-email']"));
         passwordField = driver.findElement(By.xpath("//input[@id='login-password']"));
         singInButton = driver.findElement(By.xpath("//input[@id='login-submit']"));
