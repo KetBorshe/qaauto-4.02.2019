@@ -42,7 +42,7 @@ public class SearchLinkedinTest {
         Assert.assertTrue(searchResultPage.isPageLoaded(), "Login page was not loaded.");
 
 //
-        List<WebElement> searchResults = driver.findElements(By.xpath("//div[@class='srg']/div[@class='g']"));
+        List<WebElement> searchResults = driver.findElements(By.xpath("//div[@class='search-result__wrapper']"));
         System.out.println(searchResults.size());
 
         for (WebElement searchResult : searchResults) {
