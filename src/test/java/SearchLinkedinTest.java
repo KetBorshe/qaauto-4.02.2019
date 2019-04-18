@@ -5,10 +5,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.List;
+
 
 public class SearchLinkedinTest {
 
@@ -27,33 +27,25 @@ public class SearchLinkedinTest {
         driver.quit();
     }
 
-    @DataProvider
-    public Object[][] DataProvider() {
-        return new Object[][]{
-                {"ketborshe@gmail.com", "2512Kate"}
-        };
-    }
-    @Test(dataProvider = "DataProvider")
-    public void searchTest(String userEmail, String userPassword) {
+    @Test
+    public void basicSearchTest() {
+        String userEmail = "linkedin.TST.yanina@gmail.com";
+        String userPassword ="Test123!";
+        String searchTerm = "HR";
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page was not loaded.");
+
         HomePage homePage = loginPage.login(userEmail, userPassword);
         Assert.assertTrue(homePage.isPageLoaded(), "Home page is not loaded.");
-        SearchResultPage searchResultPage = homePage.searchByWord();
-        Assert.assertTrue(searchResultPage.isPageLoaded(), "Login page was not loaded.");
 
-//
-        List<WebElement> searchResults = driver.findElements(By.xpath("//div[@class='search-result__wrapper']"));
-        System.out.println(searchResults.size());
+        SearchResultPage searchResultPage = homePage.search(searchTerm);
+        Assert.assertTrue(searchResultPage.isPageLoaded(), "Search page was not loaded.");
 
-        for (WebElement searchResult : searchResults) {
-            String searchResultString = searchResult.getText();
-            System.out.println(searchResult.getText());
-            if (searchResultString.toLowerCase().contains(homePage.searchTerm.toLowerCase())) {
-                System.out.println("SearchTerm found");
-            } else {
-                System.out.println("SearchTerm No Found");
-            }
+        Assert.assertEquals(searchResultPage.getSearchResultsCount(), 10,
+                        "Result count is wrong");
+        List<String> searchResults = searchResultPage.getSearchResults();
+        for(String searchResult : searchResults) {
+            Assert.assertTrue(searchResult.contains(searchTerm),"searchTerm: " +searchTerm + " not found in : \n " +searchResult);
         }
+
     }
 }
-
