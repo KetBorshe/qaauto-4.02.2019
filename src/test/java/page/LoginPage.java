@@ -1,3 +1,5 @@
+package page;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -5,9 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import static java.lang.Thread.sleep;
 
-public class LoginPage {
-
-    private WebDriver driver;
+public class LoginPage extends BasePage{
 
     @FindBy (xpath = "//input[@id='login-email']")
     private WebElement emailField;
@@ -17,6 +17,10 @@ public class LoginPage {
 
     @FindBy (xpath = "//input[@id='login-submit']")
     private WebElement singInButton;
+
+    @FindBy(xpath = "//a[@class='link-forgot-password']")
+    private WebElement forgotPasswordButton;
+
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
@@ -51,5 +55,16 @@ public class LoginPage {
     public boolean isTitleDisplayed() {
         return  driver.getTitle().equals("LinkedIn: Войти или зарегистрироваться");
     }
+
+    public RequestPasswordResetPage changePassword(){
+        forgotPasswordButton.click();
+        try {
+            sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return new RequestPasswordResetPage(driver);
+    }
+
 
 }

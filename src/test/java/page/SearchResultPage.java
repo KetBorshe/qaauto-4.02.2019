@@ -1,3 +1,4 @@
+package page;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -8,9 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchResultPage {
+public class SearchResultPage extends BasePage{
 
-    private WebDriver driver;
     String searchTerm = "Human Resources";
 
     @FindBy(xpath = "//li[contains(@class,'search-result__occluded-item')]")
